@@ -1,61 +1,98 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "San Francisco", sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 20px;
 }
 
 h1 {
   text-align: center;
+  font-size: 30px;
+}
+
+.language-selectors {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  border-radius: 20px;
+}
+
+.language-selectors select {
+  flex: 1;
+  margin-right: 10px;
+  border-radius: 20px;
 }
 
 .input-container,
 .output-container {
+  width: calc(50% - 10px);
   margin-bottom: 20px;
+  float: left;
+  margin-right: 10px;
 }
 
 textarea {
   width: 100%;
   height: 150px;
   padding: 10px;
+  font-family: "San Francisco", sans-serif;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 20px;
   resize: none;
+  background: #e9e9e9;
+  box-sizing: border-box;
 }
 
 .button-container {
   text-align: center;
+  position: bottom;
   margin-bottom: 20px;
 }
 
 button {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4caf50;
+  background: #0040dd;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   cursor: pointer;
+  width: 100%;
 }
 
 button:hover {
-  background-color: #45a049;
+  background: #007aff;
 }
 
-.language-selectors {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+#swap-btn {
+  padding-left: 13px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #0040dd;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  outline: none;
 }
 
-.language-selectors select {
-  margin: 0 10px;
-  padding: 5px;
-  font-size: 16px;
+#swap-btn:hover {
+  background-color: #007aff;
+}
+
+@media (max-width: 600px) {
+  .input-container,
+  .output-container {
+    width: 100%;
+    flex-direction: row;
+  }
 }

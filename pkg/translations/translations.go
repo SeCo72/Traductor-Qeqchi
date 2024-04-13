@@ -1,6 +1,6 @@
 package translations
 
-var Translations = map[string]map[string]string{
+/*var Translations = map[string]map[string]string{
 	"en": {
 		"mis":             "gato",
 		"tz'i'":           "perro",
@@ -11,4 +11,4 @@ var Translations = map[string]map[string]string{
 		"perro":      "world",
 		"cómo estás": "thanks",
 	},
-}
+}*/
