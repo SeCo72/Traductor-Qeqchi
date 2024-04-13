@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Traductor</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Traductor</h1>
+      <div class="input-container">
+        <textarea id="input-text" placeholder="Ingresa el texto a traducir"></textarea>
+      </div>
+      <div class="language-selectors">
+        <select id="from-select">
+          <option value="en">Q'eqchi</option>
+          <option value="es">Español</option>
+        </select>
+        <select id="to-select">
+          <option value="es">Español</option>
+          <option value="en">Q'eqchi</option>
+        </select>
+      </div>
+      <div class="button-container">
+        <button id="translate-btn">Traducir</button>
+      </div>
+      <div class="output-container">
+        <textarea id="output-text" placeholder="Traducción" readonly></textarea>
+      </div>
+    </div>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
