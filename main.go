@@ -11,7 +11,15 @@ import (
 
 var db *sql.DB //Variable Global para la conexion BD
 
+type Frase struct {
+	ID         int    `json:"id"`
+	Texto      string `json:"texto"`
+	Traduccion string `json:"traduccion"`
+}
+
 func main() {
+
+	gin.SetMode(gin.ReleaseMode)
 
 	//Cadena de conexion a la base de datos
 	connStr := "user=postgres password=4572. dbname=traductor sslmode=disable"
@@ -41,7 +49,6 @@ func main() {
 
 	//Define la ruta para la solicitud de traducción POST
 	r.POST("/translate", func(c *gin.Context) {
-
 		//Obtiene los parámetros de la solicitud: texto, idioma de origen y destino
 		text := c.PostForm("text")
 		from := c.PostForm("from")
@@ -53,6 +60,17 @@ func main() {
 		c.JSON(200, gin.H{
 			"translation": translation,
 		})
+	})
+
+	// Nueva ruta para obtener las frases y traducciones
+	r.GET("/frases", func(c *gin.Context) {
+		frases, err := obtenerFrases()
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(200, frases)
 	})
 
 	//Inicia el servidor en el puerto 3000
@@ -93,11 +111,9 @@ func obtenerTraducciones(from, to string) (map[string]string, error) {
 
 // Funcion para realizar la traducción de texto
 func traducir(text, from, to string) string {
-
 	//Obtiene las traducciones desde la base de datos
 	traducciones, err := obtenerTraducciones(from, to)
 	if err != nil {
-
 		return err.Error() //Devuelve el error si ocurre
 	}
 
@@ -117,4 +133,24 @@ func traducir(text, from, to string) string {
 
 	//Une las palabras traducidas en un solo texto y lo devuelve
 	return strings.Join(translatedWords, " ")
+}
+
+// Nueva función para obtener las frases y traducciones de la base de datos
+func obtenerFrases() ([]Frase, error) {
+	rows, err := db.Query("SELECT id, frase, traduccion FROM frases")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var frases []Frase
+	for rows.Next() {
+		var f Frase
+		if err := rows.Scan(&f.ID, &f.Texto, &f.Traduccion); err != nil {
+			return nil, err
+		}
+		frases = append(frases, f)
+	}
+
+	return frases, nil
 }

@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TraductorMaya</title>
-    <link rel="stylesheet" href="/static/style.css"/>
+    <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <div class="container"> 
+    <div class="container">
       <h1>Traductor</h1>
       <div class="language-selectors">
         <select id="from-select">
@@ -31,8 +31,18 @@
       <div class="button-container">
         <button id="translate-btn">Traducir</button>
       </div>
-      <div>
-        <button id="swap-btn">⇆ </button>
+      <div class="swap-button-container">
+        <button id="swap-btn">⇆</button>
+        <button id="frases-btn">💬</button>
+        <button id="audio-btn">🔊</button>
+      </div>
+    </div>
+    <!-- Modal de frases -->
+    <div id="frases-modal" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar-modal">&times;</span>
+        <h2>Frases Predeterminadas</h2>
+        <ul id="frases-lista"></ul>
       </div>
     </div>
     <script src="/static/script.js"></script>

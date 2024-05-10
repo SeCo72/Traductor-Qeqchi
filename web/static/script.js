@@ -5,6 +5,37 @@ const fromSelect = document.getElementById("from-select");
 const toSelect = document.getElementById("to-select");
 const swapBtn = document.getElementById("swap-btn");
 
+document.addEventListener("DOMContentLoaded", function() {
+  const frasesBtn = document.getElementById("frases-btn");
+  const frasesModal = document.getElementById("frases-modal");
+  const frasesLista = document.getElementById("frases-lista");
+  const cerrarModal = document.querySelector(".cerrar-modal");
+
+  frasesBtn.addEventListener("click", mostrarFrases);
+  cerrarModal.addEventListener("click", ocultarFrases);
+
+ function mostrarFrases() {
+    fetch("/frases")
+        .then(response => response.json())
+        .then(frases => {
+            let html = "";
+            frases.forEach(frase => {
+                html += `<li>${frase.texto} - ${frase.traduccion}</li>`;
+            });
+            frasesLista.innerHTML = html;
+
+            frasesModal.style.display = "block";
+        })
+        .catch(error => {
+            console.error("Error al obtener frases:", error);
+        });
+}
+
+  function ocultarFrases() {
+    frasesModal.style.display = "none";
+  }
+});
+
 //Se agrega un listener al botón de traducción
 translateBtn.addEventListener("click", () => {
   const text = inputText.value; //Obtiene el texto de entrada
