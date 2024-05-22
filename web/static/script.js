@@ -1,48 +1,43 @@
+// Obtener elementos del DOM
 const inputText = document.getElementById("input-text");
 const outputText = document.getElementById("output-text");
 const translateBtn = document.getElementById("translate-btn");
 const fromSelect = document.getElementById("from-select");
 const toSelect = document.getElementById("to-select");
 const swapBtn = document.getElementById("swap-btn");
+const audioBtn = document.getElementById("audio-btn");
+const frasesBtn = document.getElementById("frases-btn");
+const frasesModal = document.getElementById("frases-modal");
+const frasesLista = document.getElementById("frases-lista");
+const cerrarModal = document.querySelector(".cerrar-modal");
 
-document.addEventListener("DOMContentLoaded", function() {
-  const frasesBtn = document.getElementById("frases-btn");
-  const frasesModal = document.getElementById("frases-modal");
-  const frasesLista = document.getElementById("frases-lista");
-  const cerrarModal = document.querySelector(".cerrar-modal");
+const audios = {
+  "am": "/audios/am.mp3",
+  "araña": "/audios/araña.mp3"
+};
 
-  frasesBtn.addEventListener("click", mostrarFrases);
-  cerrarModal.addEventListener("click", ocultarFrases);
-
- function mostrarFrases() {
-    fetch("/frases")
-        .then(response => response.json())
-        .then(frases => {
-            let html = "";
-            frases.forEach(frase => {
-                html += `<li>${frase.texto} - ${frase.traduccion}</li>`;
-            });
-            frasesLista.innerHTML = html;
-
-            frasesModal.style.display = "block";
-        })
-        .catch(error => {
-            console.error("Error al obtener frases:", error);
-        });
+// Mostrar frases en el modal
+function mostrarFrases() {
+  fetch("/frases")
+    .then(response => response.json())
+    .then(frases => {
+      frasesLista.innerHTML = frases.map(frase => `<li>${frase.texto} - ${frase.traduccion}</li>`).join("");
+      frasesModal.style.display = "block";
+    })
+    .catch(error => console.error("Error al obtener frases:", error));
 }
 
-  function ocultarFrases() {
-    frasesModal.style.display = "none";
-  }
-});
+// Ocultar el modal de frases
+function ocultarFrases() {
+  frasesModal.style.display = "none";
+}
 
-//Se agrega un listener al botón de traducción
-translateBtn.addEventListener("click", () => {
-  const text = inputText.value; //Obtiene el texto de entrada
-  const from = fromSelect.value; //Obtiene el idioma de origen seleccionado
-  const to = toSelect.value; //Obtiene el idioma de destino seleccionado
+// Traducir texto
+function traducir() {
+  const text = inputText.value;
+  const from = fromSelect.value;
+  const to = toSelect.value;
 
-  //Realiza una solicitud POST al servidor para traducir el texto
   fetch("/translate", {
     method: "POST",
     headers: {
@@ -50,28 +45,34 @@ translateBtn.addEventListener("click", () => {
     },
     body: `text=${encodeURIComponent(text)}&from=${from}&to=${to}`,
   })
-    .then((response) => response.json()) //Parsea la respuesta como JSON
-    .then((data) => {
-      outputText.value = data.translation; //Actualiza el área de salida con la traducción
-    })
-    .catch((error) => {
-      console.error("Error:", error); //Maneja errores en la solicitud
-    });
-});
+    .then(response => response.json())
+    .then(data => outputText.value = data.translation)
+    .catch(error => console.error("Error:", error));
+}
 
-//Función para intercambiar los idiomas de origen y destino
+// Intercambiar idiomas y traducir
 function swapLanguages() {
-  const temp = fromSelect.value; //Almacena temporalmente el idioma de origen
-  fromSelect.value = toSelect.value; //Establece el idioma de origen como el idioma de destino
-  toSelect.value = temp; //Establece el idioma de destino como el idioma original
-  const inputTextValue = inputText.value; //Almacena temporalmente el texto de entrada
-  const outputTextValue = outputText.value; //Almacena temporalmente el texto de salida 
-  inputText.value = outputTextValue; //Actualiza el texto de entrada con el texto de salida
-  outputText.value = inputTextValue; //Actualiza el texto de salida con el exto original
-  
-  //Se llama a la función traducir para realizar la traduccipon después de intercambiar lo idiomas
+  [fromSelect.value, toSelect.value] = [toSelect.value, fromSelect.value];
+  [inputText.value, outputText.value] = [outputText.value, inputText.value];
   traducir();
 }
 
-//Se agrega otro listener al botón de intercambio
+// Reproducir audio de la traducción
+function reproducirAudio() {
+  const audioSrc = audios[outputText.value];
+  if (audioSrc) {
+    new Audio(audioSrc).play();
+  } else {
+    console.log("No se encontró la grabación para esta traducción.");
+  }
+}
+
+// Agregar listeners a los botones
+document.addEventListener("DOMContentLoaded", function() {
+  frasesBtn.addEventListener("click", mostrarFrases);
+  cerrarModal.addEventListener("click", ocultarFrases);
+});
+
+translateBtn.addEventListener("click", traducir);
 swapBtn.addEventListener('click', swapLanguages);
+audioBtn.addEventListener("click", reproducirAudio);

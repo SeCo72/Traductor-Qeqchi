@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TraductorMaya</title>
-    <link rel="stylesheet" href="/static/style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Traductor</h1>
-      <div class="language-selectors">
-        <select id="from-select">
-          <option value="en">Q'eqchi</option>
-          <option value="es">Español</option>
-        </select>
-        <select id="to-select">
-          <option value="es">Español</option>
-          <option value="en">Q'eqchi</option>
-        </select>
-      </div>
-      <div class="input-container">
-        <textarea
-          id="input-text"
-          placeholder="Ingresa el texto a traducir"
-        ></textarea>
-      </div>
-      <div class="output-container">
-        <textarea id="output-text" placeholder="Traducción" readonly></textarea>
-      </div>
-      <div class="button-container">
-        <button id="translate-btn">Traducir</button>
-      </div>
-      <div class="swap-button-container">
-        <button id="swap-btn">⇆</button>
-        <button id="frases-btn">💬</button>
-        <button id="audio-btn">🔊</button>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TraductorMaya</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Traductor</h1>
+    <div class="language-selectors">
+      <select id="from-select">
+        <option value="en">Q'eqchi</option>
+        <option value="es">Español</option>
+      </select>
+      <select id="to-select">
+        <option value="es">Español</option>
+        <option value="en">Q'eqchi</option>
+      </select>
     </div>
-    <!-- Modal de frases -->
-    <div id="frases-modal" class="modal">
-      <div class="modal-contenido">
-        <span class="cerrar-modal">&times;</span>
-        <h2>Frases Predeterminadas</h2>
-        <ul id="frases-lista"></ul>
-      </div>
+    <div class="input-container">
+      <textarea id="input-text" placeholder="Ingresa el texto a traducir"></textarea>
     </div>
-    <script src="/static/script.js"></script>
-  </body>
+    <div class="output-container">
+      <textarea id="output-text" placeholder="Traducción" readonly></textarea>
+    </div>
+    <div class="button-container">
+      <button id="translate-btn">Traducir</button>
+    </div>
+    <div class="swap-button-container">
+      <button id="swap-btn">⇆</button>
+      <button id="frases-btn">💬</button>
+      <button id="audio-btn">🔊</button>
+    </div>
+  </div>
+  <!-- Modal de frases -->
+  <div id="frases-modal" class="modal">
+    <div class="modal-contenido">
+      <span class="cerrar-modal">&times;</span>
+      <h2>Frases Predeterminadas</h2>
+      <ul id="frases-lista"></ul>
+    </div>
+  </div>
+  <script src="/static/script.js"></script>
+</body>
 </html>
