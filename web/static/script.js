@@ -12,8 +12,7 @@ const frasesLista = document.getElementById("frases-lista");
 const cerrarModal = document.querySelector(".cerrar-modal");
 
 const audios = {
-  "am": "/audios/am.mp3",
-  "araña": "/audios/araña.mp3"
+  "am": "/audios/am.mp3",  "araña": "/audios/araña.mp3"
 };
 
 // Mostrar frases en el modal
