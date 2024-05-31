@@ -22,19 +22,19 @@ func main() {
 
 	gin.SetMode(gin.ReleaseMode) // Configura el GIN para que corra en modo Release
 
-	//Cadena de conexion a la base de datos
+	// Cadena de conexion a la base de datos
 	connStr := "user=postgres password=4572. dbname=traductor sslmode=disable"
 
 	var err error
 
-	//Establece la conexión a las base de datos
+	// Establece la conexión a las base de datos
 	db, err = sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err) // Si hay un error, detiene el programa
 	}
 	defer db.Close() // Cierra la conexión al finalizar el programa
 
-	//Cra una instancia del erutador GIN
+	// Crea una instancia del erutador GIN
 	r := gin.Default()
 
 	// Configura una ruta estática para los archivos de audio
@@ -96,7 +96,7 @@ func obtenerTraducciones(from, to string) (map[string]string, error) {
 	}
 	defer rows.Close() // Cierra el iterador de filas al finalizar
 
-	//Itera sobre las filas y almacena las traducciones en un mapa
+	// Itera sobre las filas y almacena las traducciones en un mapa
 	for rows.Next() {
 		var palabra, traduccion, idioma_origen, idioma_destino string
 		if err := rows.Scan(&palabra, &traduccion, &idioma_origen, &idioma_destino); err != nil {

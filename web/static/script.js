@@ -11,6 +11,7 @@ const frasesModal = document.getElementById("frases-modal");
 const frasesLista = document.getElementById("frases-lista");
 const cerrarModal = document.querySelector(".cerrar-modal");
 
+// Objeto con las rutas de los archivos de audio
 const audios = {
 "nuevo": "/audios/nuevo.mp3", "contar": "/audios/contar.mp3", "araña": "/audios/araña.mp3", "fantasma": "/audios/fantasma.mp3", "sal": "/audios/sal.mp3", "pesado": "/audios/pesado.mp3",
 "correr": "/audios/correr.mp3", "cerdo": "/audios/cerdo.mp3", "cotuza": "/audios/cotuza.mp3", "idioma": "/audios/idioma.mp3", "hueso": "/audios/hueso.mp3", "mico": "/audios/mico.mp3",

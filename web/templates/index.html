@@ -1,46 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TraductorQeqchi-Español</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Traductor</h1>
-    <div class="language-selectors">
-      <select id="from-select">
-        <option value="en">Q'eqchi</option>
-        <option value="es">Español</option>
-      </select>
-      <select id="to-select">
-        <option value="es">Español</option>
-        <option value="en">Q'eqchi</option>
-      </select>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TraductorQeqchi-Español</title>
+
+    <!-- Vincula el archivo CSS externo -->
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+      <!-- Título principal -->
+      <h1>Traductor</h1>
+
+      <!-- Contenedor para los selectores de idioma -->
+      <div class="language-selectors">
+        <!-- Selector para elegir el idioma de origen -->
+        <select id="from-select">
+          <option value="en">Q'eqchi</option>
+          <option value="es">Español</option>
+        </select>
+
+        <!-- Selector para elegir el idioma de destino -->
+        <select id="to-select">
+          <option value="es">Español</option>
+          <option value="en">Q'eqchi</option>
+        </select>
+      </div>
+
+      <!-- Contenedor para el área de texto de entrada -->
+      <div class="input-container">
+        <textarea
+          id="input-text"
+          placeholder="Ingresa el texto a traducir"
+        ></textarea>
+      </div>
+
+      <!-- Contenedor para el área de texto de salida -->
+      <div class="output-container">
+        <textarea id="output-text" placeholder="Traducción" readonly></textarea>
+      </div>
+
+      <!-- Contenedor para el botón de traducción -->
+      <div class="button-container">
+        <button id="translate-btn">Traducir</button>
+      </div>
+
+      <!-- Contenedor para los botones de intercambio, frases y audio -->
+      <div class="swap-button-container">
+        <!-- Botón para intercambiar los idiomas de origen y destino -->
+        <button id="swap-btn">⇆</button>
+        <!-- Botón para abrir el modal de frases predeterminadas -->
+        <button id="frases-btn">💬</button>
+        <!-- Botón para reproducir el audio de la traducción -->
+        <button id="audio-btn">🔊</button>
+      </div>
     </div>
-    <div class="input-container">
-      <textarea id="input-text" placeholder="Ingresa el texto a traducir"></textarea>
+
+    <!-- Modal para mostrar las frases predeterminadas -->
+    <div id="frases-modal" class="modal">
+      <div class="modal-contenido">
+        <!-- Botón para cerrar el modal -->
+        <span class="cerrar-modal">&times;</span>
+        <h2>Frases Predeterminadas</h2>
+        <!-- Lista donde se mostrarán las frases -->
+        <ul id="frases-lista"></ul>
+      </div>
     </div>
-    <div class="output-container">
-      <textarea id="output-text" placeholder="Traducción" readonly></textarea>
-    </div>
-    <div class="button-container">
-      <button id="translate-btn">Traducir</button>
-    </div>
-    <div class="swap-button-container">
-      <button id="swap-btn">⇆</button>
-      <button id="frases-btn">💬</button>
-      <button id="audio-btn">🔊</button>
-    </div>
-  </div>
-  <div id="frases-modal" class="modal">
-    <div class="modal-contenido">
-      <span class="cerrar-modal">&times;</span>
-      <h2>Frases Predeterminadas</h2>
-      <ul id="frases-lista"></ul>
-    </div>
-  </div>
-  <script src="/static/script.js"></script>
-</body>
+    <!-- Vincula el archivo JavaScript externo -->
+    <script src="/static/script.js"></script>
+  </body>
 </html>
